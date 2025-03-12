@@ -12,4 +12,10 @@ test.describe('Login Test Suite', () => {
     await loginPage.login('standard_user', 'secret_sauce');
     await loginPage.expectLoginSuccess();
   });
+
+  test('Should show user locked out error message', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.login('locked_out_user', 'secret_sauce');
+    await loginPage.expectUserLockedOutErrorMessage();
+  });
 });

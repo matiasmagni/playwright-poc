@@ -1,5 +1,7 @@
 import { Page, expect } from '@playwright/test';
 
+const LOCKED_OUT_ERROR_MSG = 'Epic sadface: Sorry, this user has been locked out.';
+
 export class LoginPage {
   private page: Page;
 
@@ -11,7 +13,7 @@ export class LoginPage {
   private usernameInput = '[data-test="username"]';
   private passwordInput = '[data-test="password"]';
   private submitButton = '[data-test="login-button"]';
-  private errorMessage = '[data-test="error]';
+  private errorMessage = '[data-test="error"]';
 
   // Actions
   async goto() {
@@ -26,6 +28,11 @@ export class LoginPage {
 
   async expectErrorMessage() {
     await expect(this.page.locator(this.errorMessage)).toBeVisible();
+  }
+
+  async expectUserLockedOutErrorMessage() {
+    await expect(this.page.locator(this.errorMessage)).toBeVisible();
+    await expect(this.page.locator(this.errorMessage)).toHaveText(LOCKED_OUT_ERROR_MSG);
   }
 
   async expectLoginSuccess() {
