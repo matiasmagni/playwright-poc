@@ -18,4 +18,10 @@ test.describe('Login Test Suite', () => {
     await loginPage.login('locked_out_user', 'secret_sauce');
     await loginPage.expectUserLockedOutErrorMessage();
   });
+
+  test('Should show error message for invalid credentials', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.login('standard_user', 'xxxxxx');
+    await loginPage.expectInvalidCredentialsErrorMessage();
+  });
 });
