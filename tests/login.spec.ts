@@ -24,4 +24,16 @@ test.describe('Login Test Suite', () => {
     await loginPage.login('standard_user', 'xxxxxx');
     await loginPage.expectInvalidCredentialsErrorMessage();
   });
+
+  test('Should show password required error message', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.login('standard_user', '');
+    await loginPage.expectPasswordRequiredErrorMessage();
+  });
+
+  test('Should show username required error message', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.login('', 'xxxx');
+    await loginPage.expectUsernameRequiredErrorMessage();
+  });
 });

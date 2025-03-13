@@ -2,6 +2,8 @@ import { Page, expect } from '@playwright/test';
 
 const LOCKED_OUT_ERROR_MSG = 'Epic sadface: Sorry, this user has been locked out.';
 const INVALID_CREDENTIALS_ERROR_MSG = 'Epic sadface: Username and password do not match any user in this service';
+const PASSWORD_REQUIRED_ERROR_MSG = 'Epic sadface: Password is required';
+const USERNAME_REQUIRED_ERROR_MSG = 'Epic sadface: Username is required';
 
 export class LoginPage {
   private page: Page;
@@ -39,6 +41,16 @@ export class LoginPage {
   async expectInvalidCredentialsErrorMessage() {
     await expect(this.page.locator(this.errorMessage)).toBeVisible();
     await expect(this.page.locator(this.errorMessage)).toHaveText(INVALID_CREDENTIALS_ERROR_MSG);
+  }
+
+  async expectPasswordRequiredErrorMessage() {
+    await expect(this.page.locator(this.errorMessage)).toBeVisible();
+    await expect(this.page.locator(this.errorMessage)).toHaveText(PASSWORD_REQUIRED_ERROR_MSG);
+  }
+
+  async expectUsernameRequiredErrorMessage() {
+    await expect(this.page.locator(this.errorMessage)).toBeVisible();
+    await expect(this.page.locator(this.errorMessage)).toHaveText(USERNAME_REQUIRED_ERROR_MSG);
   }
 
   async expectLoginSuccess() {
