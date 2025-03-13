@@ -3,6 +3,8 @@ import { LoginPage } from './pages/LoginPage';
 import { InventoryPage } from './pages/InventoryPage';
 
 test.describe('Login Test Suite', () => {
+  test.use({ storageState: undefined }); // Disables authentication for this test file
+
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();

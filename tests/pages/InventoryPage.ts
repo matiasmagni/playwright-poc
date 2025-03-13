@@ -131,6 +131,10 @@ export class InventoryPage {
   }
 
   // Actions
+  async goto() {
+    await this.page.goto(this.url);
+  }
+
   async openMenu() {
     await this.menuButton.click();
   }
