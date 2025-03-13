@@ -13,10 +13,10 @@ export class LoginPage {
   }
 
   // Selectors
-  private usernameInput = '[data-test="username"]';
-  private passwordInput = '[data-test="password"]';
-  private submitButton = '[data-test="login-button"]';
-  private errorMessage = '[data-test="error"]';
+  private usernameInputLocator = '[data-test="username"]';
+  private passwordInputLocator = '[data-test="password"]';
+  private submitButtonLocator = '[data-test="login-button"]';
+  private errorMessageLocator = '[data-test="error"]';
 
   // Actions
   async goto() {
@@ -24,41 +24,37 @@ export class LoginPage {
   }
 
   async login(username: string, password: string) {
-    await this.page.fill(this.usernameInput, username);
-    await this.page.fill(this.passwordInput, password);
-    await this.page.click(this.submitButton);
+    await this.page.fill(this.usernameInputLocator, username);
+    await this.page.fill(this.passwordInputLocator, password);
+    await this.page.click(this.submitButtonLocator);
   }
 
-  async expectErrorMessage() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible();
+  async expecterrorMessageLocator() {
+    await expect(this.page.locator(this.errorMessageLocator)).toBeVisible();
   }
 
-  async expectUserLockedOutErrorMessage() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible();
-    await expect(this.page.locator(this.errorMessage)).toHaveText(LOCKED_OUT_ERROR_MSG);
+  async expectUserLockedOuterrorMessageLocator() {
+    await expect(this.page.locator(this.errorMessageLocator)).toBeVisible();
+    await expect(this.page.locator(this.errorMessageLocator)).toHaveText(LOCKED_OUT_ERROR_MSG);
   }
 
-  async expectInvalidCredentialsErrorMessage() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible();
-    await expect(this.page.locator(this.errorMessage)).toHaveText(INVALID_CREDENTIALS_ERROR_MSG);
+  async expectInvalidCredentialserrorMessageLocator() {
+    await expect(this.page.locator(this.errorMessageLocator)).toBeVisible();
+    await expect(this.page.locator(this.errorMessageLocator)).toHaveText(INVALID_CREDENTIALS_ERROR_MSG);
   }
 
-  async expectPasswordRequiredErrorMessage() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible();
-    await expect(this.page.locator(this.errorMessage)).toHaveText(PASSWORD_REQUIRED_ERROR_MSG);
+  async expectPasswordRequirederrorMessageLocator() {
+    await expect(this.page.locator(this.errorMessageLocator)).toBeVisible();
+    await expect(this.page.locator(this.errorMessageLocator)).toHaveText(PASSWORD_REQUIRED_ERROR_MSG);
   }
 
-  async expectUsernameRequiredErrorMessage() {
-    await expect(this.page.locator(this.errorMessage)).toBeVisible();
-    await expect(this.page.locator(this.errorMessage)).toHaveText(USERNAME_REQUIRED_ERROR_MSG);
-  }
-
-  async expectLoginSuccess() {
-    await expect(this.page).toHaveURL('/inventory.html');
+  async expectUsernameRequirederrorMessageLocator() {
+    await expect(this.page.locator(this.errorMessageLocator)).toBeVisible();
+    await expect(this.page.locator(this.errorMessageLocator)).toHaveText(USERNAME_REQUIRED_ERROR_MSG);
   }
 
   async expectValidationErrors() {
-    await expect(this.page.locator(this.usernameInput)).toHaveAttribute('aria-invalid', 'true');
-    await expect(this.page.locator(this.passwordInput)).toHaveAttribute('aria-invalid', 'true');
+    await expect(this.page.locator(this.usernameInputLocator)).toHaveAttribute('aria-invalid', 'true');
+    await expect(this.page.locator(this.passwordInputLocator)).toHaveAttribute('aria-invalid', 'true');
   }
 }

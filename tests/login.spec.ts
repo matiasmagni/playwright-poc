@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from './pages/LoginPage';
+import { InventoryPage } from './pages/InventoryPage';
 
 test.describe('Login Test Suite', () => {
   test.beforeEach(async ({ page }) => {
@@ -10,30 +11,31 @@ test.describe('Login Test Suite', () => {
   test('Should login with valid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.login('standard_user', 'secret_sauce');
-    await loginPage.expectLoginSuccess();
+    const inventoryPage = new InventoryPage(page);
+    await inventoryPage.expectNavigatedAndRenderPageCorrectly();
   });
 
   test('Should show user locked out error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.login('locked_out_user', 'secret_sauce');
-    await loginPage.expectUserLockedOutErrorMessage();
+    await loginPage.expectUserLockedOuterrorMessageLocator();
   });
 
   test('Should show error message for invalid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.login('standard_user', 'xxxxxx');
-    await loginPage.expectInvalidCredentialsErrorMessage();
+    await loginPage.expectInvalidCredentialserrorMessageLocator();
   });
 
   test('Should show password required error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.login('standard_user', '');
-    await loginPage.expectPasswordRequiredErrorMessage();
+    await loginPage.expectPasswordRequirederrorMessageLocator();
   });
 
   test('Should show username required error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.login('', 'xxxx');
-    await loginPage.expectUsernameRequiredErrorMessage();
+    await loginPage.expectUsernameRequirederrorMessageLocator();
   });
 });
