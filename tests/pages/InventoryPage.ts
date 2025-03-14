@@ -12,7 +12,8 @@ export class InventoryPage {
   private logoutSidebarLinkLocator = '#logout_sidebar_link';
   private resetSidebarLinkLocator = '#reset_sidebar_link';
   private closeMenuButtonLocator = '#react-burger-cross-btn';
-  private shoppingCartLinkLocator = '.shopping_cart_link';
+  private shoppingCartLinkLocator = '[data-test="shopping_cart_link"]';
+  private shoppingCartBadgeLocator = '[data-test="shopping-cart-badge"]';
   private productSortContainerLocator = '.product_sort_container';
   private activeOptionLocator = '.active_option';
   private inventoryItemLocator = '.inventory_item';
@@ -100,6 +101,20 @@ export class InventoryPage {
 
   get footerCopy(): Locator {
     return this.page.locator(this.footerCopyLocator);
+  }
+
+  async getShoppingCartLink(): Promise<Locator> {
+    return this.page.locator(this.shoppingCartLinkLocator);
+  }
+
+  async getShoppingCartBadgeCount(): Promise<number> {
+    const badge = this.page.locator(this.shoppingCartBadgeLocator);
+  
+    if (!(await badge.isVisible())) {
+      return 0;
+    }
+
+    return parseInt(await badge.innerText());
   }
 
   async getInventoryItemName(index: number): Promise<Locator> {
