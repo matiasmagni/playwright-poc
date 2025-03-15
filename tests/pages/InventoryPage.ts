@@ -125,6 +125,10 @@ export class InventoryPage {
     return parseInt(await badge.innerText());
   }
 
+  async getAllInventoryItemsDisplayed(): Promise<Locator> {
+    return this.page.locator(this.inventoryItemLocator);
+  }
+
   async getAllInventoryItemNamesDisplayed(): Promise<Array<string>> {
     return this.page.locator(this.inventoryItemNameLocator).allTextContents();
   }

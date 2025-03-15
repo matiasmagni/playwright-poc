@@ -43,4 +43,20 @@ test.describe('Inventory Test Suite', () => {
     const sortedNames = [...displayedNames].sort((a, b) => b.localeCompare(a));
     expect(displayedNames).toEqual(sortedNames);
   });
+
+  test('Should sort products by price (low to high)', async ({ page }) => {
+    const inventoryPage = new InventoryPage(page);
+    await inventoryPage.goto();
+    await inventoryPage.setProductSortDropdownValue(ProductSortOption.PriceLowHigh);
+    const productItems = await (await inventoryPage.getAllInventoryItemsDisplayed()).allTextContents();
+    
+    const prices = productItems.map((price: string) => {
+      // Find numbers with decimals
+      const match = price.match(/\d+\.\d+/);
+      return match ? parseFloat(match[0]) : 0;
+    });
+
+    const sortedPrices = [...prices].sort((a, b) => a - b);
+    expect(prices).toEqual(sortedPrices);
+  });
 });
