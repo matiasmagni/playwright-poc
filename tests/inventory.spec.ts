@@ -14,7 +14,7 @@ test.describe('Inventory Test Suite', () => {
     for (let i = 0; i < MAX_ITEMS; i++) {
       await (await inventoryPage.getAddToCartButton(i)).click();
     }
-    expect(await inventoryPage.getShoppingCartBadgeCount()).toBe(6);
+    expect(await inventoryPage.getShoppingCartBadgeCount()).toBe(MAX_ITEMS);
 
     // Remove products from the cart
     for (let i = MAX_ITEMS - 1; i >= 0; i--) {
@@ -39,7 +39,7 @@ test.describe('Inventory Test Suite', () => {
     await inventoryPage.goto();
     await inventoryPage.setProductSortDropdownValue(ProductSortOption.NameZA);
     const productItems = await inventoryPage.getAllInventoryItemNamesDisplayed();
-    const displayedNames = productItems.slice(0, 6);
+    const displayedNames = productItems.slice(0, MAX_ITEMS);
     const sortedNames = [...displayedNames].sort((a, b) => b.localeCompare(a));
     expect(displayedNames).toEqual(sortedNames);
   });

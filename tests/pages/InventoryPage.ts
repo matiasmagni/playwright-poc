@@ -19,7 +19,7 @@ export class InventoryPage {
   private logoutSidebarLinkLocator = '#logout_sidebar_link';
   private resetSidebarLinkLocator = '#reset_sidebar_link';
   private closeMenuButtonLocator = '#react-burger-cross-btn';
-  private shoppingCartLinkLocator = '[data-test="shopping_cart_link"]';
+  private shoppingCartLinkLocator = '[data-test="shopping-cart-link"]';
   private shoppingCartBadgeLocator = '[data-test="shopping-cart-badge"]';
   private productSortContainerLocator = '[data-test="product-sort-container"]';
   private activeOptionLocator = '.active_option';
@@ -181,6 +181,10 @@ export class InventoryPage {
 
   async closeMenu() {
     await this.closeMenuButton.click();
+  }
+
+  async clickShoppingCartButton() {
+    await this.shoppingCartLink.click();
   }
 
   async selectSortOption(option: string) {
