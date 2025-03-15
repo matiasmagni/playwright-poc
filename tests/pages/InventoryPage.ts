@@ -1,5 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 
+export enum ProductSortOption {
+  NameAZ = "az",
+  NameZA = "za",
+  PriceLowHigh = "lohi",
+  PriceHighLow = "hilo"
+}
+
 export class InventoryPage {
   readonly page: Page;
   private url = '/inventory.html';
@@ -103,6 +110,7 @@ export class InventoryPage {
     return this.page.locator(this.footerCopyLocator);
   }
 
+  // Getters
   async getShoppingCartLink(): Promise<Locator> {
     return this.page.locator(this.shoppingCartLinkLocator);
   }
@@ -151,6 +159,11 @@ export class InventoryPage {
 
   async getInventoryItemImage(index: number): Promise<Locator> {
     return this.inventoryItems.nth(index).locator(this.inventoryItemImageLocator);
+  }
+
+  // Setters
+  async setProductSortDropdownValue(option: ProductSortOption): Promise<void> {
+    await this.page.locator(this.productSortContainerLocator).selectOption(option);
   }
 
   // Actions

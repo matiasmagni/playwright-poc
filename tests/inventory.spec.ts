@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { InventoryPage } from './pages/InventoryPage';
+import { InventoryPage, ProductSortOption } from './pages/InventoryPage';
 
 test.describe('Inventory Test Suite', () => {
 
@@ -32,5 +32,15 @@ test.describe('Inventory Test Suite', () => {
     // Verify sorting order (A to Z)
     const sortedProducts = [...productItems].sort();
     expect(productItems).toEqual(sortedProducts);
+  });
+
+  test('Should sort products by name (Z to A)', async ({ page }) => {
+    const inventoryPage = new InventoryPage(page);
+    await inventoryPage.goto();
+    await inventoryPage.setProductSortDropdownValue(ProductSortOption.NameZA);
+    const productItems = await inventoryPage.getAllInventoryItemNamesDisplayed();
+    const displayedNames = productItems.slice(0, 6);
+    const sortedNames = [...displayedNames].sort((a, b) => b.localeCompare(a));
+    expect(displayedNames).toEqual(sortedNames);
   });
 });
