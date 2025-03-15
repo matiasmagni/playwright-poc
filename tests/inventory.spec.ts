@@ -49,7 +49,7 @@ test.describe('Inventory Test Suite', () => {
     await inventoryPage.goto();
     await inventoryPage.setProductSortDropdownValue(ProductSortOption.PriceLowHigh);
     const productItems = await (await inventoryPage.getAllInventoryItemsDisplayed()).allTextContents();
-    
+
     const prices = productItems.map((price: string) => {
       // Find numbers with decimals
       const match = price.match(/\d+\.\d+/);
@@ -57,6 +57,22 @@ test.describe('Inventory Test Suite', () => {
     });
 
     const sortedPrices = [...prices].sort((a, b) => a - b);
+    expect(prices).toEqual(sortedPrices);
+  });
+
+  test('Should sort products by price (high to low)', async ({ page }) => {
+    const inventoryPage = new InventoryPage(page);
+    await inventoryPage.goto();
+    await inventoryPage.setProductSortDropdownValue(ProductSortOption.PriceHighLow);
+    const productItems = await (await inventoryPage.getAllInventoryItemsDisplayed()).allTextContents();
+    
+    const prices = productItems.map((price: string) => {
+      // Find numbers with decimals
+      const match = price.match(/\d+\.\d+/);
+      return match ? parseFloat(match[0]) : 0;
+    });
+
+    const sortedPrices = [...prices].sort((a, b) => b - a);
     expect(prices).toEqual(sortedPrices);
   });
 });
