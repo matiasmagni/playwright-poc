@@ -14,7 +14,7 @@ export class InventoryPage {
   private closeMenuButtonLocator = '#react-burger-cross-btn';
   private shoppingCartLinkLocator = '[data-test="shopping_cart_link"]';
   private shoppingCartBadgeLocator = '[data-test="shopping-cart-badge"]';
-  private productSortContainerLocator = '.product_sort_container';
+  private productSortContainerLocator = '[data-test="product-sort-container"]';
   private activeOptionLocator = '.active_option';
   private inventoryItemLocator = '.inventory_item';
   private footerLocator = '.footer';
@@ -115,6 +115,14 @@ export class InventoryPage {
     }
 
     return parseInt(await badge.innerText());
+  }
+
+  async getAllInventoryItemNamesDisplayed(): Promise<Array<string>> {
+    return this.page.locator(this.inventoryItemNameLocator).allTextContents();
+  }
+
+  async getProductSortDropdownValue(): Promise<string> {
+    return this.page.locator(this.productSortContainerLocator).inputValue();
   }
 
   async getInventoryItemName(index: number): Promise<Locator> {
