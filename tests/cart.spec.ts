@@ -6,14 +6,14 @@ import { CheckoutStepTwoPage } from './pages/CheckoutStepTwoPage';
 import { CheckoutCompletePage } from './pages/CheckoutCompletePage';
 
 test.describe('Cart Test Suite', () => {
-  const INFO_NAME = 'Matías';
-  const INFO_LASTNAME = 'Magni';
-  const INFO_ZIP_CODE = '5500';
-  const EXPECTED_ITEMS_COUNT = 3;
-  const EXPECTED_COMPLETE_CHECKOUT_HEADER_MSG = 'Thank you for your order!';
-  const EXPECTED_COMPLETE_CHECKOUT_MSG = 'Your order has been dispatched, and will arrive just as fast as the pony can get there!';
-
   test('Should buy added items to the shopping cart list', async ({ page }) => {
+    const INFO_NAME = 'Matías';
+    const INFO_LASTNAME = 'Magni';
+    const INFO_ZIP_CODE = '5500';
+    const EXPECTED_ITEMS_COUNT = 3;
+    const EXPECTED_COMPLETE_CHECKOUT_HEADER_MSG = 'Thank you for your order!';
+    const EXPECTED_COMPLETE_CHECKOUT_MSG = 'Your order has been dispatched, and will arrive just as fast as the pony can get there!';
+
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.goto();
 
