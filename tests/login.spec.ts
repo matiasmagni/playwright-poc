@@ -14,7 +14,7 @@ test.describe('Login Test Suite', () => {
     const loginPage = new LoginPage(page);
     await loginPage.login('standard_user', 'secret_sauce');
     const inventoryPage = new InventoryPage(page);
-    await inventoryPage.expectNavigatedAndRenderPageCorrectly();
+    await inventoryPage.expectPageLoaded();
   });
 
   test('Should show user locked out error message', async ({ page }) => {

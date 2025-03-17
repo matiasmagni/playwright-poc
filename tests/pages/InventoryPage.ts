@@ -195,7 +195,7 @@ export class InventoryPage {
     return this.inventoryItems.nth(index);
   }
 
-  async expectNavigatedAndRenderPageCorrectly() {
+  async expectPageLoaded() {
     await expect(this.page).toHaveURL(this.getUrl());
     await expect(this.inventoryContainer).toBeVisible();
   }
