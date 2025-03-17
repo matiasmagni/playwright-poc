@@ -183,6 +183,11 @@ export class InventoryPage {
     await this.closeMenuButton.click();
   }
 
+  async logout() {
+    await this.openMenu();
+    await this.logoutSidebarLink.click();
+  }
+
   async clickShoppingCartButton() {
     await this.shoppingCartLink.click();
   }

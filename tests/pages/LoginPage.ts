@@ -13,20 +13,31 @@ export class LoginPage {
   }
 
   // Selectors
+  private loginContainerLocator = '[data-test="login-container"]';
   private usernameInputLocator = '[data-test="username"]';
   private passwordInputLocator = '[data-test="password"]';
   private submitButtonLocator = '[data-test="login-button"]';
   private errorMessageLocator = '[data-test="error"]';
 
+  // Getters
+  async getUrl() {
+    return '/';
+  }
+
   // Actions
   async goto() {
-    await this.page.goto('/');
+    await this.page.goto(await this.getUrl());
   }
 
   async login(username: string, password: string) {
     await this.page.fill(this.usernameInputLocator, username);
     await this.page.fill(this.passwordInputLocator, password);
     await this.page.click(this.submitButtonLocator);
+  }
+
+  async expectPageLoaded() {
+    await expect(this.page).toHaveURL(await this.getUrl());
+    await expect(this.page.locator(this.loginContainerLocator)).toBeVisible();
   }
 
   async expecterrorMessageLocator() {

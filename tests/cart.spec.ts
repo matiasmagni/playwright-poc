@@ -13,7 +13,6 @@ test.describe('Cart Test Suite', () => {
     const EXPECTED_ITEMS_COUNT = 3;
     const EXPECTED_COMPLETE_CHECKOUT_HEADER_MSG = 'Thank you for your order!';
     const EXPECTED_COMPLETE_CHECKOUT_MSG = 'Your order has been dispatched, and will arrive just as fast as the pony can get there!';
-
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.goto();
 
